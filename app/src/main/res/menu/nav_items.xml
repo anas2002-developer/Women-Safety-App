@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    <item android:title="General">
+        <menu>
+            <group
+                android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/row_home"
+                    android:title="Home"
+                    android:icon="@drawable/home" />
+
+                <item
+                    android:id="@+id/row_contact"
+                    android:title="Contact"
+                    android:icon="@drawable/contact" />
+
+                <item
+                    android:id="@+id/row_helpline"
+                    android:title="Helpline Numbers"
+                    android:icon="@drawable/helpline" />
+
+                <item
+                    android:id="@+id/row_sirenplay"
+                    android:title="Siren Play"
+                    android:icon="@drawable/siren" />
+
+                <item
+                    android:id="@+id/row_fakecall"
+                    android:title="Fake Call"
+                    android:icon="@drawable/fakecall" />
+                <item
+                    android:id="@+id/row_profile"
+                    android:title="Profile"
+                    android:icon="@drawable/profile" />
+                <item
+                    android:id="@+id/row_settings"
+                    android:title="Settings"
+                    android:icon="@drawable/settings" />
+
+            </group>
+        </menu>
+    </item>
+
+
+    <item android:title="Communicate">
+        <menu>
+            <group
+                android:checkableBehavior="single">
+                <item
+                    android:id="@+id/row_howtouse"
+                    android:title="How To Use"
+                    android:icon="@drawable/howtouse" />
+                <item
+                    android:id="@+id/row_feedback"
+                    android:title="Feedback"
+                    android:icon="@drawable/feedback" />
+                <item
+                    android:id="@+id/row_share"
+                    android:title="Share App"
+                    android:icon="@drawable/share" />
+
+                <item
+                    android:id="@+id/row_community"
+                    android:title="Community Support"
+                    android:icon="@drawable/community" />
+            </group>
+        </menu>
+    </item>
+</menu>

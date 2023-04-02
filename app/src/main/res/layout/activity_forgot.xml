@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2F2F8"
+    tools:context=".ForgotActivity">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lotti_forgot"
+        android:layout_marginTop="50dp"
+        android:layout_width="380dp"
+        android:layout_height="300dp"
+        android:layout_centerHorizontal="true"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/details_lottie">
+
+    </com.airbnb.lottie.LottieAnimationView>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="350dp">
+
+        <TextView
+            android:id="@+id/txtForgot"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/regular"
+            android:text="Please Enter Your Email Address  "
+            android:layout_gravity="center"
+            android:textSize="15sp"
+            android:textStyle="normal"
+            android:textColor="#3D3749"/>
+        <TextView
+            android:id="@+id/txtForgot_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Associated with App"
+            android:layout_gravity="center"
+            android:textSize="15sp"
+            android:fontFamily="@font/regular"
+            android:textStyle="normal"
+            android:textColor="#3D3749"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="320dp"
+            android:layout_marginTop="50dp"
+            android:id="@+id/crdView"
+            android:layout_height="wrap_content"
+            android:outlineAmbientShadowColor="#fff"
+            app:cardElevation="5dp"
+            app:cardCornerRadius="26dp"
+            app:cardMaxElevation="2dp">
+
+
+            <EditText
+                android:id="@+id/eEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:hint="Enter Email"
+                android:padding="15dp"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:shadowColor="@color/white"
+                android:textColorHint="#A5A5A5"
+                android:textSize="16sp" />
+
+
+
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSend"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/btn_pink_bg_rounded"
+            android:inputType="textCapSentences"
+            android:elevation="10dp"
+            android:padding="10dp"
+            android:shadowDx="@integer/material_motion_duration_long_2"
+            android:shadowDy="@integer/material_motion_duration_long_1"
+            android:shadowRadius="@integer/material_motion_duration_long_1"
+            android:text="Send"
+            android:fontFamily="@font/bold"
+            android:shadowColor="#7061D7"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:onClick="send"/>
+
+
+        <TextView
+            android:id="@+id/txtForgotPass"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:text="try another way?"
+            android:fontFamily="@font/italic"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            android:textColor="#87868F" />
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

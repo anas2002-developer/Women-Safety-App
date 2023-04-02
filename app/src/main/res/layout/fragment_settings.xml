@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FEF3F7"
+    tools:context=".FRAGS.SettingsFrag">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:textSize="28dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/txtSettings_title" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apperance"
+        android:textSize="16dp"
+        android:fontFamily="@font/regular"
+        android:textColor="#A5A5A5"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/txtSettings_title"
+        android:id="@+id/txtSettings_desc1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dark Mode"
+        android:textSize="20dp"
+        android:fontFamily="@font/bold"
+        android:textColor="#000000"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_below="@id/txtSettings_desc1"
+        android:id="@+id/txtSettings_feature1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="General"
+        android:textSize="16dp"
+        android:fontFamily="@font/regular"
+        android:textColor="#A5A5A5"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_below="@id/txtSettings_feature1"
+        android:id="@+id/txtSettings_desc2" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLogout"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="300dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/bold"
+        android:background="@drawable/btn_pink_bg_rounded"
+        android:inputType="textCapSentences"
+        android:elevation="10dp"
+        android:padding="10dp"
+        android:text="Log out"
+        android:shadowColor="#7061D7"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:textStyle="bold"/>
+
+</RelativeLayout>

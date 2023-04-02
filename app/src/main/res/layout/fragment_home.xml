@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/light_pink"
+    android:orientation="vertical"
+    tools:context=".FRAGS.HomeFrag">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardMap"
+        android:layout_width="370dp"
+        android:layout_height="500dp"
+        android:layout_centerHorizontal="true"
+        app:cardElevation="2dp"
+        android:layout_marginTop="20dp"
+        app:cardCornerRadius="26dp" >
+
+
+        <fragment
+            android:id="@+id/gmap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.google.android.gms.maps.SupportMapFragment" />
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/sos"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_below="@+id/cardMap"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/sos"
+        android:layout_marginLeft="140dp"/>
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/light_pink"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".SignupActivity">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="250dp"
+        android:layout_height="240dp"
+        app:lottie_autoPlay="true"
+        android:paddingTop="40dp"
+        app:lottie_loop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        app:lottie_rawRes="@raw/details_lottie">
+    </com.airbnb.lottie.LottieAnimationView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="300dp">
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="300dp"
+            android:layout_height="47dp"
+            android:outlineAmbientShadowColor="#673AB7"
+            app:cardElevation="2dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            app:cardCornerRadius="26dp">
+
+
+
+            <EditText
+                android:id="@+id/eEmail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColorHint="#A5A5A5"
+                android:inputType="textEmailAddress"
+                android:hint="Enter Email"
+                android:fontFamily="@font/regular"
+                android:padding="15dp"
+                android:background="@color/white" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="300dp"
+            android:layout_height="49dp"
+            app:cardElevation="2dp"
+            android:layout_marginTop="25dp"
+            app:cardCornerRadius="26dp" >
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/pink2"
+                android:layout_height="52dp">
+
+                <EditText
+                    android:id="@+id/ePass"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColorHint="#A5A5A5"
+                    android:hint="Enter Password"
+                    android:fontFamily="@font/regular"
+                    android:inputType="textPassword"
+                    android:padding="15dp"
+                    android:background="@color/white" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSignup"
+            android:layout_width="300dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/bold"
+            android:background="@drawable/btn_pink_bg_rounded"
+            android:inputType="textCapSentences"
+            android:elevation="10dp"
+            android:padding="10dp"
+            android:text="Sign Up"
+            android:shadowColor="#7061D7"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:onClick="login2"/>
+
+        <TextView
+            android:id="@+id/txtSkip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Login >"
+            android:layout_marginTop="65dp"
+            android:textColor="@color/pink2"
+            android:fontFamily="@font/regular"
+            android:textSize="15sp"
+            android:textStyle="normal"
+            android:onClick="signup2"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

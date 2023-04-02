@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WOMEN_SAFETY_APP</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="open_drawer">OpenDrawer</string>
+    <string name="close_drawer">CloseDrawer</string>
+</resources>

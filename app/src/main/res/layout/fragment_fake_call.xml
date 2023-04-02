@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFF4F8"
+    android:gravity="center_horizontal"
+    tools:context=".FakeCallActivity">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="380dp"
+        android:layout_height="380dp"
+        android:layout_marginTop="0dp"
+        android:layout_centerHorizontal="true"
+        app:lottie_autoPlay="true"
+        android:paddingTop="10dp"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/fake_call"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="300dp"
+        android:layout_height="49dp"
+        app:cardElevation="2dp"
+        android:layout_marginTop="20dp"
+        app:cardCornerRadius="26dp" >
+
+
+        <EditText
+            android:id="@+id/eDelay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColorHint="#A5A5A5"
+            android:maxLines="1"
+            android:inputType="textPersonName"
+            android:hint="Enter Delay (in mins)"
+            android:padding="15dp"
+            android:background="@color/white" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnContact"
+        android:layout_width="300dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/btn_pink_bg_rounded"
+        android:fontFamily="@font/bold"
+        android:inputType="textCapSentences"
+        android:elevation="10dp"
+        android:padding="10dp"
+        android:text="Choose Contact"
+        android:shadowColor="#000"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:textStyle="bold"/>
+
+</LinearLayout>

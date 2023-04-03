@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.ContactsContract;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -41,9 +42,11 @@ public class ContactList extends AppCompatActivity {
         searchView=findViewById(R.id.searchView);
         contactArrayList = new ArrayList<>();
 
-        if (ContextCompat.checkSelfPermission(ContactList.this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.READ_CONTACTS}, 1);
-        }
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+//        if (ContextCompat.checkSelfPermission(ContactList.this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.READ_CONTACTS}, 1);
+//        }
 
         ContentResolver contentResolver = getContentResolver();
         String[] projection = {ContactsContract.Contacts.DISPLAY_NAME};

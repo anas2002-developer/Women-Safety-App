@@ -48,10 +48,10 @@ public class ContactFrag extends Fragment {
         vRV.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE)
-                != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.CALL_PHONE},100);
-        }
+//        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE)
+//                != PackageManager.PERMISSION_GRANTED){
+//            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.CALL_PHONE},100);
+//        }
 
         root= FirebaseDatabase.getInstance().getReference().child("WOMENSAFETY").child("CONTACTS");
 

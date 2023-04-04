@@ -3,11 +3,14 @@ package com.anas.women_safety_app.FRAGS;
 import static android.app.Activity.RESULT_OK;
 
 import android.Manifest;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.media.MediaPlayer;
+import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -18,6 +21,8 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
+import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -55,7 +60,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.dynamiclinks.DynamicLink;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.karumi.dexter.Dexter;
@@ -95,6 +103,12 @@ public class HomeFrag extends Fragment {
     int minute = calendar.get(Calendar.MINUTE);
     String currentTime = hour + ":" + minute;
 
+    MediaRecorder mediaRecorder;
+    MediaPlayer mediaPlayer;
+
+    Handler handler = new Handler();
+    int DELAY = 5000; // 30 seconds in milliseconds
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -115,7 +129,8 @@ public class HomeFrag extends Fragment {
                 Manifest.permission.CALL_PHONE,
                 Manifest.permission.SEND_SMS,
                 Manifest.permission.READ_CONTACTS,
-                Manifest.permission.CAMERA};
+                Manifest.permission.CAMERA,
+                Manifest.permission.RECORD_AUDIO };
 
         Dexter.withContext(getActivity())
                 .withPermissions(permissions)
@@ -143,6 +158,7 @@ public class HomeFrag extends Fragment {
         sos.setOnClickListener(v -> {
             sos4location();
             sos4link();
+            Toast.makeText(getActivity(), "Sharing", Toast.LENGTH_SHORT).show();
             sos4live();
             sos4call();
         });
@@ -153,13 +169,52 @@ public class HomeFrag extends Fragment {
 
         btnVideo.setOnClickListener(v -> {
             Intent i = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-            i.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 60);
+            i.putExtra(MediaStore.EXTRA_DURATION_LIMIT, DELAY/1000);
             i.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
             startActivityForResult(i, 500);
         });
 
-        btnTrack.setOnClickListener(v -> {
-            sos4nolive();
+        btnRecording.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    mediaRecorder = new MediaRecorder();
+                    mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+                    mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+                    mediaRecorder.setOutputFile(getRecordingFilePath());
+                    mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+                    mediaRecorder.prepare();
+                    mediaRecorder.start();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            // Stop recording
+                            mediaRecorder.stop();
+                            mediaRecorder.release();
+                            mediaRecorder = null;
+                            sendAudio();
+                            Toast.makeText(getActivity(), "Recording stopped automatically!", Toast.LENGTH_LONG).show();
+                        }
+                    }, DELAY);
+
+
+                    Toast.makeText(getActivity(),"Recording started!!",Toast.LENGTH_LONG).show();
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+        sos.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(getActivity(), "no sharing", Toast.LENGTH_SHORT).show();
+                sos4nolive();
+                return true;
+            }
         });
 
         return view;
@@ -303,8 +358,8 @@ public class HomeFrag extends Fragment {
     private void sos4live() {
         locationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .setInterval(15000) // Update interval in milliseconds
-                .setFastestInterval(1000); // Fastest update interval in milliseconds
+                .setInterval(DELAY) // Update interval in milliseconds
+                .setFastestInterval(DELAY); // Fastest update interval in milliseconds
 
         locationCallback = new LocationCallback() {
             @Override
@@ -312,7 +367,6 @@ public class HomeFrag extends Fragment {
                 // Get the user's current location
                 Location userLocation = locationResult.getLastLocation();
                 sos4sms(mapsLink);
-                Toast.makeText(getActivity(), "Location Sharing started", Toast.LENGTH_SHORT).show();
 
             }
         };
@@ -326,7 +380,6 @@ public class HomeFrag extends Fragment {
     private void sos4nolive() {
 
         if (locationCallback != null) {
-            Toast.makeText(getActivity(), "location sharing stopped", Toast.LENGTH_SHORT).show();
             LocationServices.getFusedLocationProviderClient(getActivity()).removeLocationUpdates(locationCallback);
         }
     }
@@ -347,10 +400,25 @@ public class HomeFrag extends Fragment {
                         .addOnSuccessListener(taskSnapshot -> {
                             roots.getDownloadUrl().addOnSuccessListener(uri -> {
 
-                                link = uri.toString();
-                                System.out.println(link);
-//                                sos4sms(link);
-                                Toast.makeText(getActivity(), "vid sent", Toast.LENGTH_SHORT).show();
+                                FirebaseDynamicLinks.getInstance().createDynamicLink()
+                                        .setLink(Uri.parse(uri.toString()))
+                                        .setDomainUriPrefix("https://surakshak2.page.link")
+                                        .setAndroidParameters(
+                                                new DynamicLink.AndroidParameters.Builder()
+                                                        .setMinimumVersion(1)
+                                                        .build())
+                                        .buildShortDynamicLink()
+                                        .addOnCompleteListener(task -> {
+                                            if (task.isSuccessful()) {
+                                                Uri shortLink = task.getResult().getShortLink();
+                                                link = shortLink.toString();
+                                                System.out.println(link);
+                                                sos4sms("Vid : "+link);
+                                            } else {
+                                                // Handle error
+                                            }
+                                        });
+
                             });
                         })
                         .addOnFailureListener(e -> {
@@ -369,44 +437,109 @@ public class HomeFrag extends Fragment {
                         .addOnSuccessListener(taskSnapshot -> {
                             roots.getDownloadUrl().addOnSuccessListener(uri -> {
 
-                                link = uri.toString();
-                                System.out.println(link);
-                                sos4sms(link);
-                                Toast.makeText(getActivity(), "photo sent", Toast.LENGTH_SHORT).show();
+                                FirebaseDynamicLinks.getInstance().createDynamicLink()
+                                        .setLink(Uri.parse(uri.toString()))
+                                        .setDomainUriPrefix("https://surakshak2.page.link")
+                                        .setAndroidParameters(
+                                                new DynamicLink.AndroidParameters.Builder()
+                                                        .setMinimumVersion(1)
+                                                        .build())
+                                        .buildShortDynamicLink()
+                                        .addOnCompleteListener(task -> {
+                                            if (task.isSuccessful()) {
+                                                Uri shortLink = task.getResult().getShortLink();
+                                                link = shortLink.toString();
+                                                System.out.println(link);
+                                                sos4sms("Photo : "+link);
+                                            } else {
+                                                // Handle error
+                                            }
+                                        });
+
+
                             });
                         })
                         .addOnFailureListener(e -> {
 
                         });
+
+
             }
-
-
         }
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        sos4live();
+
+    private String getRecordingFilePath() {
+        ContextWrapper contextWrapper = new ContextWrapper(getActivity());
+        File musicDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
+        File file = new File(musicDirectory, "testRecordingFile.mp3");
+        return file.getPath();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+    public void sendAudio() {
 
+        Uri uriRec = Uri.fromFile(new File(getRecordingFilePath()));
+
+        FirebaseStorage fdbs = FirebaseStorage.getInstance();
+        StorageReference roots = fdbs.getReference().child("LOCATION_IMG/" + FirebaseAuth.getInstance().getCurrentUser().getUid()+currentDate+currentTime+".mp3");
+
+        StorageMetadata metadata = new StorageMetadata.Builder()
+                .setContentType("audio/AMR_NB")
+                .build();
+        roots.putFile(uriRec,metadata)
+                .addOnSuccessListener(taskSnapshot -> {
+                    roots.getDownloadUrl().addOnSuccessListener(uri -> {
+
+                        FirebaseDynamicLinks.getInstance().createDynamicLink()
+                                .setLink(Uri.parse(uri.toString()))
+                                .setDomainUriPrefix("https://surakshak2.page.link")
+                                .setAndroidParameters(
+                                        new DynamicLink.AndroidParameters.Builder()
+                                                .setMinimumVersion(1)
+                                                .build())
+                                .buildShortDynamicLink()
+                                .addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()) {
+                                        Uri shortLink = task.getResult().getShortLink();
+                                        link = shortLink.toString();
+                                        System.out.println(link);
+                                        sos4sms("Recording : "+link);
+                                        Toast.makeText(getActivity(), link, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        // Handle error
+                                    }
+                                });
+
+                    });
+                })
+                .addOnFailureListener(e -> {
+
+                });
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        sos4live();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        sos4nolive();
-    }
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+////        sos4live();
+//    }
+//
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//
+//    }
+//
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+////        sos4live();
+//    }
+//
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//        sos4nolive();
+//    }
 }
 
 

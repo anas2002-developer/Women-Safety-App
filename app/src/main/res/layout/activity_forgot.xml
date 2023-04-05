@@ -9,13 +9,13 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lotti_forgot"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:layout_width="380dp"
         android:layout_height="300dp"
         android:layout_centerHorizontal="true"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/details_lottie">
+        app:lottie_rawRes="@raw/forget_lottie">
 
     </com.airbnb.lottie.LottieAnimationView>
 

@@ -8,8 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="icon_color">#DA267D</color>
-    <color name="pink">#F264A5</color>
-    <color name="pink2">#DA267D</color>
-    <color name="light_pink">#F5EFF2</color>
+    <color name="icon_color">#FA67B0</color>
+    <color name="pink1">#EC89B9</color>
+    <color name="pink2">#FA67B0</color>
+    <color name="dark_pink">#D81C7A</color>
+    <color name="light_pink">#FFF4f8</color>
 </resources>

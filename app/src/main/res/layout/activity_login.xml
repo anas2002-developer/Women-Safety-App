@@ -116,7 +116,7 @@
             android:layout_gravity="center"
             android:text="Sign up >"
             android:layout_marginTop="65dp"
-            android:textColor="@color/pink2"
+            android:textColor="@color/dark_pink"
             android:fontFamily="@font/regular"
             android:textSize="15sp"
             android:textStyle="normal"

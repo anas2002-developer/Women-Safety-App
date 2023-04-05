@@ -67,27 +67,24 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.row_contact:
                     frag = new ContactFrag();
-                    Toast.makeText(this, "Add contact", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.row_helpline:
                     frag = new HelplineFrag();
-                    Toast.makeText(this, "Helpline Numbers", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.row_sirenplay:
                     frag = new SirenPlayFrag();
-                    Toast.makeText(this, "Siren Play", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.row_fakecall:
                     frag = new FakeCallFrag();
-                    Toast.makeText(this, "Fake Call", Toast.LENGTH_SHORT).show();
+
                     break;
                 case R.id.row_profile:
                     frag = new ProfileFrag();
-                    Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
+
                     break;
                 case R.id.row_settings:
                     frag = new SettingsFrag();
-                    Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+
                     break;
                 case R.id.row_howtouse:
 //                    frag = new HowtouseFragment();

@@ -107,7 +107,7 @@ public class HomeFrag extends Fragment {
     MediaPlayer mediaPlayer;
 
     Handler handler = new Handler();
-    int DELAY = 5000; // 30 seconds in milliseconds
+    int DELAY = 15000; // 30 seconds in milliseconds
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -119,7 +119,6 @@ public class HomeFrag extends Fragment {
         btnCurrent = view.findViewById(R.id.btnCurrent);
         btnPhoto = view.findViewById(R.id.btnPhoto);
         btnVideo = view.findViewById(R.id.btnVideo);
-        btnTrack = view.findViewById(R.id.btnTrack);
         btnRecording = view.findViewById(R.id.btnRecording);
 
         smf = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.gmap);
@@ -151,14 +150,15 @@ public class HomeFrag extends Fragment {
                 }).check();
 
         btnCurrent.setOnClickListener(v -> {
+            Toast.makeText(getActivity(), "Location Updated", Toast.LENGTH_SHORT).show();
             showCurrentLocation();
         });
 
 
         sos.setOnClickListener(v -> {
-            sos4location();
+            Toast.makeText(getActivity(), "Location Sharing Started", Toast.LENGTH_SHORT).show();
+
             sos4link();
-            Toast.makeText(getActivity(), "Sharing", Toast.LENGTH_SHORT).show();
             sos4live();
             sos4call();
         });
@@ -211,7 +211,7 @@ public class HomeFrag extends Fragment {
         sos.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Toast.makeText(getActivity(), "no sharing", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Location Sharing Stopped", Toast.LENGTH_SHORT).show();
                 sos4nolive();
                 return true;
             }
@@ -255,13 +255,13 @@ public class HomeFrag extends Fragment {
     }
 
     public void sos4call() {
-        String Phone = "7060997580";
+        String Phone = "100";
         Intent i = new Intent(Intent.ACTION_CALL);
         i.setData(Uri.parse("tel:" + Phone));
         startActivity(i);
     }
 
-    private void sos4sms(String sms2) {
+    public void sos4sms(String sms2) {
 
         try {
             SmsManager smsManager = SmsManager.getDefault();
@@ -290,7 +290,7 @@ public class HomeFrag extends Fragment {
                 }
             });
 
-            Toast.makeText(getActivity(), "sms sent", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), "sms sent", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(getActivity(), "sms not sent", Toast.LENGTH_SHORT).show();
@@ -298,7 +298,7 @@ public class HomeFrag extends Fragment {
 
     }
 
-    private void sos4address(LatLng latLng) {
+    public void sos4address(LatLng latLng) {
         try {
             Geocoder geocoder = new Geocoder(getActivity());
             ArrayList<Address> arrAddresses = new ArrayList<>();
@@ -306,8 +306,8 @@ public class HomeFrag extends Fragment {
 
             sms = "I m stuck help !";
             sms += "\nCURRENT LOCATION : " + arrAddresses.get(0).getAddressLine(0);
-            sms += "\n\nNEARBY LANDMARK : \n" + arrAddresses.get(1).getAddressLine(0);
 
+            Toast.makeText(getActivity(), "Current location sent (text)", Toast.LENGTH_SHORT).show();
             sos4sms(sms);
 
         } catch (Exception e) {
@@ -315,7 +315,7 @@ public class HomeFrag extends Fragment {
         }
     }
 
-    private void sos4location() {
+    public void sos4location() {
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
@@ -342,7 +342,7 @@ public class HomeFrag extends Fragment {
         });
     }
 
-    private void sos4link() {
+    public void sos4link() {
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
@@ -350,12 +350,13 @@ public class HomeFrag extends Fragment {
             @Override
             public void onSuccess(Location location) {
 
+                sos4location();
                 mapsLink = "https://www.google.com/maps?q=" + location.getLatitude() + "," + location.getLongitude();
             }
         });
     }
 
-    private void sos4live() {
+    public void sos4live() {
         locationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(DELAY) // Update interval in milliseconds
@@ -366,6 +367,7 @@ public class HomeFrag extends Fragment {
             public void onLocationResult(LocationResult locationResult) {
                 // Get the user's current location
                 Location userLocation = locationResult.getLastLocation();
+                Toast.makeText(getActivity(), "location sent", Toast.LENGTH_SHORT).show();
                 sos4sms(mapsLink);
 
             }
@@ -377,7 +379,7 @@ public class HomeFrag extends Fragment {
 
     }
 
-    private void sos4nolive() {
+    public void sos4nolive() {
 
         if (locationCallback != null) {
             LocationServices.getFusedLocationProviderClient(getActivity()).removeLocationUpdates(locationCallback);
@@ -413,6 +415,7 @@ public class HomeFrag extends Fragment {
                                                 Uri shortLink = task.getResult().getShortLink();
                                                 link = shortLink.toString();
                                                 System.out.println(link);
+                                                Toast.makeText(getActivity(), "Video Sent", Toast.LENGTH_SHORT).show();
                                                 sos4sms("Vid : "+link);
                                             } else {
                                                 // Handle error
@@ -450,6 +453,7 @@ public class HomeFrag extends Fragment {
                                                 Uri shortLink = task.getResult().getShortLink();
                                                 link = shortLink.toString();
                                                 System.out.println(link);
+                                                Toast.makeText(getActivity(), "Photo Sent", Toast.LENGTH_SHORT).show();
                                                 sos4sms("Photo : "+link);
                                             } else {
                                                 // Handle error
@@ -469,7 +473,7 @@ public class HomeFrag extends Fragment {
     }
 
 
-    private String getRecordingFilePath() {
+    public String getRecordingFilePath() {
         ContextWrapper contextWrapper = new ContextWrapper(getActivity());
         File musicDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
         File file = new File(musicDirectory, "testRecordingFile.mp3");
@@ -503,8 +507,9 @@ public class HomeFrag extends Fragment {
                                         Uri shortLink = task.getResult().getShortLink();
                                         link = shortLink.toString();
                                         System.out.println(link);
+                                        Toast.makeText(getActivity(), "Recording Sent", Toast.LENGTH_SHORT).show();
                                         sos4sms("Recording : "+link);
-                                        Toast.makeText(getActivity(), link, Toast.LENGTH_SHORT).show();
+//                                        Toast.makeText(getActivity(), link, Toast.LENGTH_SHORT).show();
                                     } else {
                                         // Handle error
                                     }

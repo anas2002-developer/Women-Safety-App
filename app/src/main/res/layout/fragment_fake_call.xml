@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="#FFF4F8"
     android:gravity="center_horizontal"
-    tools:context=".FakeCallActivity">
+    tools:context=".FRAGS.FakeCallFrag">
 
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="380dp"

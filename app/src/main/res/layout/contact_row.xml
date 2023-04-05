@@ -8,7 +8,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="90dp"
-        android:backgroundTint="#FEF3F7"
+        android:backgroundTint="@color/light_pink"
         app:cardUseCompatPadding="true"
         app:cardCornerRadius="18dp"
         app:cardElevation="0dp"
@@ -34,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:text="Name here"
                     android:textStyle="bold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/dark_pink"
                     android:textSize="18dp" />
 
                 <TextView

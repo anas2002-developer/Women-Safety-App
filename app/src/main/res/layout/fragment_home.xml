@@ -11,9 +11,10 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardMap"
         android:layout_width="370dp"
-        android:layout_height="480dp"
+        android:layout_height="540dp"
         android:layout_centerHorizontal="true"
         app:cardCornerRadius="26dp"
+        android:layout_marginBottom="5dp"
         app:cardElevation="2dp">
 
 
@@ -21,30 +22,21 @@
             android:id="@+id/gmap"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            tools:layout="@layout/activity_main" />
 
     </androidx.cardview.widget.CardView>
 
+
     <ImageView
         android:id="@+id/sos"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:layout_below="@+id/cardMap"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="140dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
         android:src="@drawable/sos" />
-
-
-    <ImageView
-        android:id="@+id/btnCurrent"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="333dp"
-        android:layout_marginBottom="163dp"
-        android:src="@drawable/sos_current" />
 
     <ImageView
         android:id="@+id/btnPhoto"
@@ -52,20 +44,20 @@
         android:layout_height="60dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="313dp"
-        android:layout_marginBottom="73dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="94dp"
         android:src="@drawable/sos_img" />
 
     <ImageView
         android:id="@+id/btnVideo"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="74dp"
+        android:layout_height="70dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="179dp"
-        android:layout_marginEnd="172dp"
-        android:layout_marginBottom="11dp"
+        android:layout_marginStart="296dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="6dp"
         android:src="@drawable/sos_video" />
 
     <ImageView
@@ -74,18 +66,18 @@
         android:layout_height="60dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="35dp"
-        android:layout_marginBottom="73dp"
+        android:layout_marginEnd="290dp"
+        android:layout_marginBottom="10dp"
         android:src="@drawable/sos_recording" />
 
     <ImageView
-        android:id="@+id/btnTrack"
+        android:id="@+id/btnCurrent"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="163dp"
+        android:layout_marginEnd="314dp"
+        android:layout_marginBottom="100dp"
         android:src="@drawable/sos_track" />
 
 

@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/light_pink"
-                app:title=" "
+                app:title="\t\t\t\t\t\t\t\tSURAKSHAK"
                 android:id="@+id/toolbar" />
 
         </com.google.android.material.appbar.AppBarLayout>

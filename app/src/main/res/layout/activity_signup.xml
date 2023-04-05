@@ -8,14 +8,14 @@
     tools:context=".SignupActivity">
 
     <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="250dp"
-        android:layout_height="240dp"
+        android:layout_width="270dp"
+        android:layout_height="270dp"
         app:lottie_autoPlay="true"
         android:paddingTop="40dp"
         app:lottie_loop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        app:lottie_rawRes="@raw/details_lottie">
+        android:layout_marginTop="20dp"
+        app:lottie_rawRes="@raw/hand_lottie">
     </com.airbnb.lottie.LottieAnimationView>
 
     <LinearLayout
@@ -102,7 +102,7 @@
             android:layout_gravity="center"
             android:text="Login >"
             android:layout_marginTop="65dp"
-            android:textColor="@color/pink2"
+            android:textColor="@color/dark_pink"
             android:fontFamily="@font/regular"
             android:textSize="15sp"
             android:textStyle="normal"

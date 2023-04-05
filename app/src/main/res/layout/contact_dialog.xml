@@ -3,7 +3,7 @@
     android:layout_width="320dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#D4B5FA"
+    android:background="@color/white"
     app:cardElevation="8dp">
 
     <LinearLayout
@@ -16,7 +16,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:textColor="@color/black"
+            android:textColor="@color/dark_pink"
+            android:textStyle="bold"
             android:text="Contact Details"
             android:textSize="20dp"/>
 
@@ -26,7 +27,7 @@
             android:layout_height="120dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:src="@drawable/applogo_white"/>
+            android:src="@drawable/logo_pink" />
 
 
         <androidx.cardview.widget.CardView

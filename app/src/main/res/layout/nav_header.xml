@@ -8,16 +8,15 @@
     android:layout_height="180dp">
 
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginLeft="0dp"
         android:src="@drawable/applogo_white" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ATTENDIFY"
+        android:text="SURAKSHAK"
         android:layout_marginLeft="12dp"
         android:textSize="18sp"
         android:textColor="#FFFFFF"/>

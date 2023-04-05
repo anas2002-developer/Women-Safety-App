@@ -79,7 +79,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_marginTop="5dp"
-                        android:text="Shruti"
+                        android:text="Name Here"
                         android:textColor="@color/pink2"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -114,7 +114,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_marginTop="5dp"
-                        android:text="shrutisaini1415@gmail.com"
+                        android:text="mail@gmail.com"
                         android:textColor="@color/pink2"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -219,7 +219,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_marginTop="5dp"
-                        android:text="658990954"
+                        android:text="XXXXXXXXXXXX"
                         android:textColor="@color/pink2"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -254,7 +254,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_marginTop="5dp"
-                        android:text="Jaspur, US Nagar"
+                        android:text="abc"
                         android:textColor="@color/pink2"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -289,7 +289,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_marginTop="5dp"
-                        android:text="Jaspur"
+                        android:text="xyz"
                         android:textColor="@color/pink2"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -313,7 +313,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
-                        android:text="State"
+                        android:text="State here"
                         android:textColor="#7C7777"
                         android:textSize="15sp"
                         android:textStyle="bold" />
@@ -359,7 +359,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_marginTop="5dp"
-                        android:text="244712"
+                        android:text="123456"
                         android:textColor="@color/pink2"
                         android:textSize="18sp"
                         android:textStyle="bold" />

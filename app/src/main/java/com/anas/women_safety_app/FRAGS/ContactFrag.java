@@ -29,12 +29,23 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ContactFrag extends Fragment {
 
     RecyclerView vRV;
     DatabaseReference root;
     Adapter adapter;
+
+    Calendar calendar = Calendar.getInstance();
+    int year = calendar.get(Calendar.YEAR);
+    int month = calendar.get(Calendar.MONTH);
+    int day = calendar.get(Calendar.DAY_OF_MONTH);
+    String currentDate = "_" + day + ":" + (month + 1) + ":" + year + "_";
+    int hour = calendar.get(Calendar.HOUR_OF_DAY);
+    int minute = calendar.get(Calendar.MINUTE);
+    int second = calendar.get(Calendar.SECOND);
+    String currentTime = hour + ":" + minute + ":" + second;
 
     FloatingActionButton fab;
 
@@ -104,7 +115,7 @@ public class ContactFrag extends Fragment {
                 DatabaseReference root2 = fdb.getReference();
                 root2.child("WOMENSAFETY")
                         .child("CONTACTS")
-                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid()+currentDate+currentTime)
                         .setValue(model);
                 dialog.dismiss();
             }

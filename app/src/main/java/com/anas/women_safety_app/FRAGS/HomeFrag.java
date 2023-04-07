@@ -3,9 +3,14 @@ package com.anas.women_safety_app.FRAGS;
 import static android.app.Activity.RESULT_OK;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -23,6 +28,7 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.provider.MediaStore;
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -81,7 +87,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class HomeFrag extends Fragment {
+public class HomeFrag extends Fragment implements SensorEventListener {
 
     SupportMapFragment smf;
     private FusedLocationProviderClient client;
@@ -109,6 +115,11 @@ public class HomeFrag extends Fragment {
     Handler handler = new Handler();
     int DELAY = 15000; // 30 seconds in milliseconds
 
+    private SensorManager sensorManager;
+    private Sensor accelerometer;
+    private static final float SHAKE_THRESHOLD_GRAVITY = 10f;
+    private long lastShakeTime;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -120,6 +131,10 @@ public class HomeFrag extends Fragment {
         btnPhoto = view.findViewById(R.id.btnPhoto);
         btnVideo = view.findViewById(R.id.btnVideo);
         btnRecording = view.findViewById(R.id.btnRecording);
+
+        sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        lastShakeTime = System.currentTimeMillis();
 
         smf = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.gmap);
         client = LocationServices.getFusedLocationProviderClient(getActivity());
@@ -255,7 +270,7 @@ public class HomeFrag extends Fragment {
     }
 
     public void sos4call() {
-        String Phone = "100";
+        String Phone = "7060997570";
         Intent i = new Intent(Intent.ACTION_CALL);
         i.setData(Uri.parse("tel:" + Phone));
         startActivity(i);
@@ -522,6 +537,45 @@ public class HomeFrag extends Fragment {
                 });
     }
 
+//    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            float gravityX = event.values[0] / SensorManager.GRAVITY_EARTH;
+            float gravityY = event.values[1] / SensorManager.GRAVITY_EARTH;
+            float gravityZ = event.values[2] / SensorManager.GRAVITY_EARTH;
+
+            float gravityForce = (float) Math.sqrt(gravityX * gravityX + gravityY * gravityY + gravityZ * gravityZ);
+            if (gravityForce > SHAKE_THRESHOLD_GRAVITY) {
+                long currentTime = System.currentTimeMillis();
+                if (currentTime - lastShakeTime > 2000) {  // wait 2 seconds before next shake
+                    lastShakeTime = currentTime;
+                    sos.performClick(); // Trigger button click event
+                    Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+                    if (vibrator != null) {
+                        vibrator.vibrate(500); // Vibrate for 500 milliseconds
+                    }
+
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(this);
+    }
 //    @Override
 //    public void onStop() {
 //        super.onStop();

@@ -552,7 +552,7 @@ public class HomeFrag extends Fragment implements SensorEventListener {
                     sos.performClick(); // Trigger button click event
                     Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
                     if (vibrator != null) {
-                        vibrator.vibrate(500); // Vibrate for 500 milliseconds
+                        vibrator.vibrate(500); // Vibrate for 500 ms
                     }
 
                 }
@@ -576,6 +576,7 @@ public class HomeFrag extends Fragment implements SensorEventListener {
         super.onPause();
         sensorManager.unregisterListener(this);
     }
+
 //    @Override
 //    public void onStop() {
 //        super.onStop();

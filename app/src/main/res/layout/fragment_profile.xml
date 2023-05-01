@@ -23,7 +23,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="700dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginTop="5dp"
             app:cardCornerRadius="25dp">
@@ -84,13 +84,7 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="30dp"
-                        android:src="@drawable/pencil" />
+
 
                 </RelativeLayout>
 
@@ -119,13 +113,6 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="30dp"
-                        android:src="@drawable/pencil" />
 
                 </RelativeLayout>
 
@@ -154,13 +141,6 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="30dp"
-                        android:src="@drawable/pencil" />
 
                 </RelativeLayout>
 
@@ -189,13 +169,6 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="30dp"
-                        android:src="@drawable/pencil" />
 
                 </RelativeLayout>
 
@@ -224,13 +197,6 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="30dp"
-                        android:src="@drawable/pencil" />
 
                 </RelativeLayout>
 
@@ -259,13 +225,6 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="30dp"
-                        android:src="@drawable/pencil" />
 
                 </RelativeLayout>
 
@@ -294,14 +253,6 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="30dp"
-                        android:src="@drawable/pencil" />
-
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -329,13 +280,6 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="30dp"
-                        android:src="@drawable/pencil" />
 
                 </RelativeLayout>
 
@@ -364,17 +308,21 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="30dp"
-                        android:src="@drawable/pencil" />
+
 
                 </RelativeLayout>
 
 
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/btn_pink_bg"
+                    android:layout_marginRight="20dp"
+                    android:text="EDIT"
+                    android:textColor="@color/white"/>
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>

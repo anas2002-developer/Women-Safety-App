@@ -33,6 +33,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,161 +51,31 @@ import java.util.List;
 
 public class ShortcutActivity extends AppCompatActivity {
 
-    HomeFrag homeFragment;
-
     SupportMapFragment smf;
     private FusedLocationProviderClient client;
     private LocationRequest locationRequest;
     private LocationCallback locationCallback;
-
     String sms = "Hi! This is just a testing message (by Mohd Anas), dont worry";
     String link = " ";
     String mapsLink = " ";
-
-    Calendar calendar = Calendar.getInstance();
-    int year = calendar.get(Calendar.YEAR);
-    int month = calendar.get(Calendar.MONTH);
-    int day = calendar.get(Calendar.DAY_OF_MONTH);
-    String currentDate = "_" + day + ":" + (month + 1) + ":" + year + "_";
-    int hour = calendar.get(Calendar.HOUR_OF_DAY);
-    int minute = calendar.get(Calendar.MINUTE);
-    String currentTime = hour + ":" + minute;
-
-    MediaRecorder mediaRecorder;
-    MediaPlayer mediaPlayer;
-
     Handler handler = new Handler();
     int DELAY = 15000; // 30 seconds in milliseconds
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shortcut);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-         homeFragment = (HomeFrag) getSupportFragmentManager().findFragmentById(R.id.layFL);
 
-        String[] permissions = {android.Manifest.permission.ACCESS_FINE_LOCATION,
-                android.Manifest.permission.CALL_PHONE,
-                android.Manifest.permission.SEND_SMS,
-                android.Manifest.permission.READ_CONTACTS,
-                android.Manifest.permission.CAMERA,
-                Manifest.permission.RECORD_AUDIO };
+        smf = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.gmap);
+        client = LocationServices.getFusedLocationProviderClient(getApplicationContext());
 
-        Dexter.withContext(getApplicationContext())
-                .withPermissions(permissions)
-                .withListener(new MultiplePermissionsListener() {
-                    @Override
-                    public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
-                        if (multiplePermissionsReport.areAllPermissionsGranted()) {
+        Toast.makeText(getApplicationContext(), "Location Sharing Started", Toast.LENGTH_SHORT).show();
 
-                            Toast.makeText(ShortcutActivity.this, "sharing started", Toast.LENGTH_SHORT).show();
-                            sos4location();
-                            sos4link();
-                            sos4live();
-                            sos4call();
+        sos4link();
+        sos4live();
+        sos4call();
 
-                        }
-                        if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied()) {
-                        }
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
-                        permissionToken.continuePermissionRequest();
-                    }
-                }).check();
-    }
-
-
-    public void sos4call() {
-        String Phone = "7060997580";
-        Intent i = new Intent(Intent.ACTION_CALL);
-        i.setData(Uri.parse("tel:" + Phone));
-        startActivity(i);
-    }
-
-    public void sos4sms(String sms2) {
-
-        try {
-            SmsManager smsManager = SmsManager.getDefault();
-
-            FirebaseDatabase fdb = FirebaseDatabase.getInstance();
-            DatabaseReference root = fdb.getReference().child("WOMENSAFETY").child("CONTACTS");
-
-            root.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-
-                        Model model = snapshot1.getValue(Model.class);
-                        String phone = model.getPhone();
-                        smsManager.sendTextMessage(phone, null, sms2, null, null);
-
-                        System.out.println(phone);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                    Toast.makeText(getApplicationContext(), "Failed to retrieve phone from firebase", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-//            Toast.makeText(getActivity(), "sms sent", Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "sms not sent", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-    public void sos4address(LatLng latLng) {
-        try {
-            Geocoder geocoder = new Geocoder(getApplicationContext());
-            ArrayList<Address> arrAddresses = new ArrayList<>();
-            arrAddresses = (ArrayList<Address>) geocoder.getFromLocation(latLng.latitude, latLng.longitude, 5);
-
-            sms = "I m stuck help !";
-            sms += "\nCURRENT LOCATION : " + arrAddresses.get(0).getAddressLine(0);
-            sms += "\n\nNEARBY LANDMARK : \n" + arrAddresses.get(1).getAddressLine(0);
-
-            Toast.makeText(getApplicationContext(), "Current location sent (text)", Toast.LENGTH_SHORT).show();
-            sos4sms(sms);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void sos4location() {
-        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        client.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-
-
-                smf.getMapAsync(new OnMapReadyCallback() {
-                    @Override
-                    public void onMapReady(@NonNull GoogleMap googleMap) {
-
-
-                        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14f));
-
-
-                        sos4address(latLng);
-
-                    }
-                });
-            }
-        });
     }
 
     public void sos4link() {
@@ -244,6 +115,91 @@ public class ShortcutActivity extends AppCompatActivity {
 
     }
 
+    public void sos4call() {
+        String Phone = "7060997570";
+        Intent i = new Intent(Intent.ACTION_CALL);
+        i.setData(Uri.parse("tel:" + Phone));
+        startActivity(i);
+    }
+
+    public void sos4location() {
+        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        client.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+
+
+
+
+                        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+
+//                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14f));
+
+
+                        sos4address(latLng);
+
+
+            }
+        });
+    }
+
+    public void sos4sms(String sms2) {
+
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+
+            FirebaseDatabase fdb = FirebaseDatabase.getInstance();
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            DatabaseReference root = fdb.getReference().child("SURAKSHAK").child(mAuth.getCurrentUser().getUid()).child("CONTACTS");
+
+            root.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+
+                        Model model = snapshot1.getValue(Model.class);
+                        String phone = model.getPhone();
+                        smsManager.sendTextMessage(phone, null, sms2, null, null);
+
+                        System.out.println(phone);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                    Toast.makeText(getApplicationContext(), "Failed to retrieve phone from firebase", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+//            Toast.makeText(getActivity(), "sms sent", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "sms not sent", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public void sos4address(LatLng latLng) {
+        try {
+            Geocoder geocoder = new Geocoder(getApplicationContext());
+            ArrayList<Address> arrAddresses = new ArrayList<>();
+            arrAddresses = (ArrayList<Address>) geocoder.getFromLocation(latLng.latitude, latLng.longitude, 5);
+
+            sms = "I m stuck help !";
+            sms += "\nCURRENT LOCATION : " + arrAddresses.get(0).getAddressLine(0);
+
+            Toast.makeText(getApplicationContext(), "Current location sent (text)", Toast.LENGTH_SHORT).show();
+            sos4sms(sms);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void sos4nolive() {
 
         if (locationCallback != null) {
@@ -254,7 +210,7 @@ public class ShortcutActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Toast.makeText(this, "sharing stopped", Toast.LENGTH_SHORT).show();
-        homeFragment.sos4nolive();
+        Toast.makeText(getApplicationContext(), "Location Sharing Stopped", Toast.LENGTH_SHORT).show();
+        sos4nolive();
     }
 }

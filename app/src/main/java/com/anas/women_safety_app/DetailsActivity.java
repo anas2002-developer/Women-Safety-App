@@ -109,7 +109,7 @@ public class DetailsActivity extends AppCompatActivity {
                     FirebaseDatabase fdb = FirebaseDatabase.getInstance();
                     DatabaseReference root = fdb.getReference();
 
-                    root.child("WOMENSAFETY").child("PROFILE").child(mAuth.getCurrentUser().getUid()).setValue(model);
+                    root.child("SURAKSHAK").child(mAuth.getCurrentUser().getUid()).child("PROFILE").setValue(model);
 
 
                     FirebaseStorage fdbs = FirebaseStorage.getInstance();

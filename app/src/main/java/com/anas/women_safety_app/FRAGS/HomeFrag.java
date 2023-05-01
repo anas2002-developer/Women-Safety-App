@@ -282,7 +282,8 @@ public class HomeFrag extends Fragment implements SensorEventListener {
             SmsManager smsManager = SmsManager.getDefault();
 
             FirebaseDatabase fdb = FirebaseDatabase.getInstance();
-            DatabaseReference root = fdb.getReference().child("WOMENSAFETY").child("CONTACTS");
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            DatabaseReference root = fdb.getReference().child("SURAKSHAK").child(mAuth.getCurrentUser().getUid()).child("CONTACTS");
 
             root.addValueEventListener(new ValueEventListener() {
                 @Override

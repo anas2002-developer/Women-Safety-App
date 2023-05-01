@@ -28,8 +28,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class ContactFrag extends Fragment {
 
@@ -37,15 +40,7 @@ public class ContactFrag extends Fragment {
     DatabaseReference root;
     Adapter adapter;
 
-    Calendar calendar = Calendar.getInstance();
-    int year = calendar.get(Calendar.YEAR);
-    int month = calendar.get(Calendar.MONTH);
-    int day = calendar.get(Calendar.DAY_OF_MONTH);
-    String currentDate = "_" + day + ":" + (month + 1) + ":" + year + "_";
-    int hour = calendar.get(Calendar.HOUR_OF_DAY);
-    int minute = calendar.get(Calendar.MINUTE);
-    int second = calendar.get(Calendar.SECOND);
-    String currentTime = hour + ":" + minute + ":" + second;
+    Calendar calendar ;
 
     FloatingActionButton fab;
 
@@ -64,7 +59,7 @@ public class ContactFrag extends Fragment {
 //            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.CALL_PHONE},100);
 //        }
 
-        root= FirebaseDatabase.getInstance().getReference().child("WOMENSAFETY").child("CONTACTS");
+        root= FirebaseDatabase.getInstance().getReference().child("SURAKSHAK").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("CONTACTS");
 
         FirebaseRecyclerOptions<Model> options =
                 new FirebaseRecyclerOptions.Builder<Model>()
@@ -110,12 +105,22 @@ public class ContactFrag extends Fragment {
                 Toast.makeText(getActivity(), "Blank Field!", Toast.LENGTH_SHORT).show();
             }
             else {
+                calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                int minute = calendar.get(Calendar.MINUTE);
+                int second = calendar.get(Calendar.SECOND);
+                String currDT = "_" + day + ":" + (month + 1) + ":" + year + "_"+hour + ":" + minute + ":" + second;
+
                 Model model = new Model(Name,Phone,Type);
                 FirebaseDatabase fdb = FirebaseDatabase.getInstance();
                 DatabaseReference root2 = fdb.getReference();
-                root2.child("WOMENSAFETY")
+                root2.child("SURAKSHAK")
+                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                         .child("CONTACTS")
-                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid()+currentDate+currentTime)
+                        .child(currDT)
                         .setValue(model);
                 dialog.dismiss();
             }

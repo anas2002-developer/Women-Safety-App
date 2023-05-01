@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="320dp"
+    android:layout_height="wrap_content"
+    android:background="@color/light_pink">
+
+    <TextView
+        android:id="@+id/txtDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Details"
+        android:textColor="@color/dark_pink"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/bold"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="50dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="300dp"
+            android:layout_height="49dp"
+            app:cardElevation="2dp"
+            android:layout_marginTop="20dp"
+            app:cardCornerRadius="26dp" >
+
+
+            <EditText
+                android:id="@+id/eName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColorHint="#A5A5A5"
+                android:maxLines="1"
+                android:inputType="textPersonName"
+                android:fontFamily="@font/regular"
+                android:hint="Name"
+                android:padding="15dp"
+                android:background="@color/white" />
+
+        </androidx.cardview.widget.CardView>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_gravity="left">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="140dp"
+                android:layout_height="49dp"
+                app:cardElevation="2dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="14dp"
+                app:cardCornerRadius="26dp" >
+
+
+                <EditText
+                    android:id="@+id/eAge"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColorHint="#A5A5A5"
+                    android:maxLines="1"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/regular"
+                    android:hint="Age"
+                    android:padding="15dp"
+                    android:background="@color/white" />
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                android:layout_marginLeft="157dp"
+                android:layout_height="49dp"
+                app:cardElevation="2dp"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="26dp" >
+
+
+                <EditText
+                    android:id="@+id/eBlood"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColorHint="#A5A5A5"
+                    android:maxLines="1"
+                    android:inputType="textPersonName"
+                    android:textAllCaps="true"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/regular"
+                    android:hint="Blood Group"
+                    android:padding="15dp"
+                    android:background="@color/white" />
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="300dp"
+            android:layout_height="49dp"
+            app:cardElevation="2dp"
+            app:cardCornerRadius="26dp" >
+
+
+            <EditText
+                android:id="@+id/eContact"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColorHint="#A5A5A5"
+                android:maxLines="1"
+                android:inputType="number"
+                android:fontFamily="@font/regular"
+                android:hint="Contact"
+                android:padding="15dp"
+                android:background="@color/white" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="300dp"
+            android:layout_height="49dp"
+            app:cardElevation="2dp"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="26dp" >
+
+
+            <EditText
+                android:id="@+id/eStreet"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColorHint="#A5A5A5"
+                android:maxLines="1"
+                android:inputType="textPersonName"
+                android:fontFamily="@font/regular"
+                android:hint="Street Line"
+                android:padding="15dp"
+                android:background="@color/white" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="300dp"
+            android:layout_height="49dp"
+            app:cardElevation="2dp"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="26dp" >
+            <EditText
+                android:id="@+id/eCity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColorHint="#A5A5A5"
+                android:hint="City"
+                android:fontFamily="@font/regular"
+                android:inputType="text"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:padding="15dp"
+                android:background="@color/white" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="300dp"
+            android:layout_height="49dp"
+            app:cardElevation="2dp"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="26dp" >
+
+            <EditText
+                android:id="@+id/eState"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColorHint="#A5A5A5"
+                android:inputType="textEmailAddress"
+                android:hint="State"
+                android:maxLines="1"
+                android:fontFamily="@font/regular"
+                android:padding="15dp"
+                android:background="@color/white" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="300dp"
+            android:layout_height="49dp"
+            app:cardElevation="2dp"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="26dp" >
+            <EditText
+                android:id="@+id/ePincode"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColorHint="#A5A5A5"
+                android:inputType="number"
+                android:hint="PINCODE"
+                android:maxLines="1"
+                android:fontFamily="@font/regular"
+                android:padding="15dp"
+                android:background="@color/white"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSave"
+            android:layout_width="300dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/btn_pink_bg_rounded"
+            android:fontFamily="@font/bold"
+            android:inputType="textCapSentences"
+            android:elevation="10dp"
+            android:padding="10dp"
+            android:text="SAVE"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+
+</RelativeLayout>
+
+

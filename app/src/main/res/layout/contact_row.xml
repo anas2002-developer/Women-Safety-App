@@ -20,6 +20,7 @@
             android:orientation="horizontal" >
 
             <LinearLayout
+                android:id="@+id/LL_Contact"
                 android:layout_width="280dp"
                 android:layout_height="match_parent"
                 android:gravity="bottom"
@@ -62,10 +63,16 @@
                 android:paddingTop="2dp">
 
                 <ImageView
+                    android:id="@+id/btnDelete"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/delete_img" />
+
+                <ImageView
                     android:id="@+id/btnCall"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="40dp"
+                    android:layout_marginLeft="20dp"
                     android:src="@drawable/phone_img" />
             </LinearLayout>
         </LinearLayout>
